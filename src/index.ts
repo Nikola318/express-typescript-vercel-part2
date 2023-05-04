@@ -83,6 +83,16 @@ function getKeys(payment_method?: string) {
 }
 
 app.get(
+  '/',
+  (req: express.Request, res: express.Response): express.Response<any> => {
+    const { publishable_key } = getKeys(req.query.paymentMethod as string);
+
+    return res.send({ publishableKey: publishable_key });
+  }
+);
+
+
+app.get(
   '/stripe-key',
   (req: express.Request, res: express.Response): express.Response<any> => {
     const { publishable_key } = getKeys(req.query.paymentMethod as string);
